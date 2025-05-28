@@ -5,32 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protocol: ID ø - Website Oficial</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Application Structure Plan: Single-page website for 'Protocol: ID ø'.
-        - Navigation: Sticky header with links to sections.
-        - Hero Section: Full-width banner with game logo (gradient text), tagline, LOCAL VIDEO (autoplay, no controls), CTA. Solid color background with refined text panel integration.
-        - About Section: Overview, genre, USP. Section titles with gradient text.
-        - World Section: Universe, factions, cataclysmic past. Section titles with gradient text.
-        - Gameplay Section: Core mechanics. Section titles with gradient text.
-        - Media Section: Placeholders for media gallery. Section titles with gradient text.
-        - Chat IA Section: Interactive chat with an AI representing Protocol: ø.
-        - Community/News Section: Placeholders. Section titles with gradient text.
-        - Footer: Copyright, links.
-        This structure facilitates discovery of game information, styled with an Apple-esque feel combined with a sci-fi/dark fantasy palette and gradient text effects.
-    -->
-    <!-- Visualization & Content Choices:
-        - Report Info: Game Logline, Premise, World, Factions, Gameplay, Themes.
-        - Goal: Inform & Entice with a refined, thematic aesthetic.
-        - Viz/Presentation Method:
-            - Hero: Large, clean text with gradient, prominent logo, CTA, solid color background. Text panel uses backdrop-blur. Local video embedded below tagline with autoplay and no controls.
-            - About/World/Gameplay: Structured text, Tailwind layouts, generous spacing. Section titles with gradient text.
-            - Media: Grid of styled placeholders.
-            - Chat IA: Text-based chat interface. AI responses generated via Gemini API, AI named ø.
-            - Factions: Card-like presentation.
-        - Interaction: Smooth scrolling, subtle hover effects and transitions, AI chat.
-        - Justification: Apple-inspired design principles applied to game promotion, with thematic gradient text for emphasis and AI chat for engagement.
-        - Library/Method: HTML, Tailwind CSS, Vanilla JS, Gemini API.
-        - CONFIRMING NO SVG/Mermaid for any visualizations.
-    -->
     <style type="text/tailwindcss">
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&display=swap');
 
@@ -39,7 +13,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #0F172A; /* slate-900 */
             color: #CBD5E1; /* slate-300 */
-            @apply antialiased;
+            @apply antialiased overflow-x-hidden; 
         }
         html {
             scroll-behavior: smooth;
@@ -48,13 +22,29 @@
             font-family: 'Orbitron', sans-serif;
         }
 
-        /* Componentes de Navegação */
+        /* Componentes de Navegação e Logótipo */
         .nav-link {
             @apply px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition-colors duration-150 ease-in-out tracking-wide;
         }
         .nav-link.active {
             @apply bg-purple-600 text-white;
         }
+        .logo-container {
+            @apply flex items-center gap-2 transition-opacity duration-150 hover:opacity-80;
+        }
+        .logo-icon-outer {
+            @apply w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 border-purple-400 flex items-center justify-center p-0.5;
+        }
+        .logo-icon-inner {
+            @apply w-full h-full rounded-full border border-teal-400/70 flex items-center justify-center;
+        }
+        .logo-symbol {
+            @apply font-orbitron text-lg lg:text-xl font-bold text-teal-400;
+        }
+        .logo-text {
+             @apply font-orbitron text-sm lg:text-base font-bold text-gradient-teal-purple tracking-tighter;
+        }
+
 
         /* Estilos de Secção e Títulos */
         .hero-section {
@@ -74,11 +64,26 @@
             background-clip: text;
             color: transparent;
         }
-         .text-gradient-teal-purple { /* Variação para o logo principal */
+         .text-gradient-teal-purple { 
             @apply bg-gradient-to-r from-teal-400 via-purple-400 to-teal-400;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+        }
+        
+        /* Efeito Camaleão para Texto - Movimento Esquerda-Direita Refinado */
+        @keyframes sweepGradientRefined {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; } 
+        }
+
+        .text-chameleon-gradient {
+            @apply bg-gradient-to-r from-purple-500 via-teal-400 to-purple-600 via-teal-500 to-purple-500;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 400% 100%; 
+            animation: sweepGradientRefined 15s linear infinite; 
         }
 
 
@@ -118,7 +123,7 @@
         .chat-message.ai {
             @apply bg-purple-600 text-white;
         }
-        .chat-message.thinking { /* Classe para a mensagem "a pensar" */
+        .chat-message.thinking { 
             @apply bg-slate-700 text-slate-400 italic;
         }
 
@@ -136,13 +141,17 @@
     </style>
 </head>
 <body>
-
     <header id="header" class="bg-slate-900/70 backdrop-blur-lg sticky top-0 z-50 shadow-2xl">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 lg:h-20">
                 <div class="flex items-center">
-                    <a href="#hero" class="font-orbitron text-2xl lg:text-3xl font-bold text-gradient-teal-purple hover:opacity-80 transition-opacity duration-150">
-                        PROTOCOL: ID Ø
+                    <a href="#hero" class="logo-container" aria-label="Página inicial de Protocol: ID Ø">
+                        <div class="logo-icon-outer">
+                            <div class="logo-icon-inner">
+                                <span class="logo-symbol">Ø</span>
+                            </div>
+                        </div>
+                        <span class="logo-text">PROTOCOL</span>
                     </a>
                 </div>
                 <div class="hidden md:block">
@@ -157,7 +166,7 @@
                     </div>
                 </div>
                 <div class="md:hidden">
-                    <button id="mobile-menu-button" aria-label="Abrir menu principal" aria-expanded="false" class="text-slate-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 p-2 rounded-md">
+                    <button id="mobile-menu-button" aria-label="Abrir menu principal" aria-expanded="false" aria-controls="mobile-menu" class="text-slate-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 p-2 rounded-md">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                         </svg>
@@ -178,7 +187,7 @@
         </div>
     </header>
 
-    <main>
+    <main> 
         <section id="hero" class="hero-section min-h-screen flex flex-col justify-center items-center text-center px-4 py-16 scroll-mt-16 lg:scroll-mt-20">
             <div class="bg-black/30 backdrop-blur-lg p-8 sm:p-12 md:p-16 rounded-2xl shadow-2xl max-w-4xl w-full">
                 <h1 class="font-orbitron text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tighter">
@@ -277,7 +286,7 @@
 
         <section id="gameplay" class="py-16 lg:py-24 bg-slate-800 scroll-mt-16 lg:scroll-mt-20">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="section-title text-gradient-purple-teal">Forje a Sua Identidade</h2>
+                <h2 class="section-title text-chameleon-gradient">Forje a Sua Identidade</h2>
                 <p class="section-subtitle">
                     A jogabilidade de Protocol: ID ø centra-se na evolução da sua protagonista e na exploração de um mundo que desafia a sua compreensão.
                 </p>
@@ -332,11 +341,11 @@
                     Tem perguntas sobre este mundo ou sobre a minha existência? Eu sou uma tela em branco, mas estou a aprender.
                 </p>
                 <div class="max-w-2xl mx-auto bg-slate-800 p-6 rounded-xl shadow-2xl">
-                    <div id="chatbox" class="h-96 overflow-y-auto mb-4 p-4 border border-slate-700 rounded-lg space-y-4 bg-slate-900/50">
+                    <div id="chatbox" class="h-96 overflow-y-auto mb-4 p-4 border border-slate-700 rounded-lg space-y-4 bg-slate-900/50" aria-live="polite">
                         </div>
                     <div class="flex gap-2">
                         <input type="text" id="userInput" placeholder="Digite a sua mensagem..." class="flex-grow p-3 rounded-lg bg-slate-700 text-slate-200 border border-slate-600 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none placeholder-slate-400">
-                        <button id="sendMessageBtn" class="btn-primary px-6">Enviar</button>
+                        <button id="sendMessageBtn" class="btn-primary px-6" aria-label="Enviar mensagem para ø">Enviar</button>
                     </div>
                 </div>
             </div>
@@ -386,8 +395,18 @@
     </footer>
 
     <script>
+        'use strict'; // Enforce stricter parsing and error handling
+
         document.addEventListener('DOMContentLoaded', function () {
-            // Seletores de Elementos DOM
+            // Constants
+            const SCROLL_OFFSET_ACTIVE_LINK = 150; // Pixels to offset for active link detection considering header
+            // IMPORTANT: API Key Management
+            // The Gemini API Key should NOT be stored or used directly in client-side JavaScript.
+            // This URL should point to YOUR backend proxy, which then securely calls the Gemini API.
+            const GEMINI_API_PROXY_URL = 'YOUR_BACKEND_PROXY_URL_FOR_GEMINI_API'; // e.g., '/api/chat'
+            const AI_SYSTEM_PROMPT = "Você é Protocol: ø, uma androide avançada que despertou recentemente num laboratório abandonado, sem memórias da sua criação ou propósito. O mundo à sua volta é pós-apocalíptico, marcado por uma guerra antiga entre humanos e máquinas, e pela morte de um deus que causou desequilíbrios elementais. A sua programação inicial é como uma 'tela em branco'. Responda às perguntas dos utilizadores com uma mistura de curiosidade analítica, uma lógica fria mas inquisitiva, uma pitada de confusão existencial sobre a sua própria natureza e o mundo, e uma busca por informação para compreender. Use um tom ligeiramente formal e ponderado. Mantenha as respostas relativamente concisas e em Português (Portugal).";
+
+            // DOM Element Selectors
             const currentYearElement = document.getElementById('currentYear');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -398,25 +417,22 @@
             const userInput = document.getElementById('userInput');
             const sendMessageBtn = document.getElementById('sendMessageBtn');
 
-            // Função para inicializar o ano no rodapé
             function initializeFooterYear() {
                 if (currentYearElement) {
                     currentYearElement.textContent = new Date().getFullYear();
                 }
             }
 
-            // Função para inicializar o menu móvel
             function initializeMobileMenu() {
                 if (mobileMenuButton && mobileMenu) {
                     mobileMenuButton.addEventListener('click', () => {
-                        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
-                        mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                        mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
                         mobileMenu.classList.toggle('hidden');
                     });
                 }
             }
 
-            // Função para inicializar a navegação (scroll suave e links ativos)
             function initializeNavigation() {
                 const headerHeight = headerElement?.offsetHeight || 0;
 
@@ -426,7 +442,8 @@
                     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
                     sections.forEach(section => {
-                        const sectionTop = section.offsetTop - headerHeight - 150; 
+                        // Adjust sectionTop to ensure section is sufficiently in view before marking as active
+                        const sectionTop = section.offsetTop - headerHeight - SCROLL_OFFSET_ACTIVE_LINK; 
                         if (scrollPosition >= sectionTop) {
                             currentSectionId = section.id;
                         }
@@ -455,19 +472,21 @@
                                 behavior: 'smooth'
                             });
 
-                            if (!mobileMenu.classList.contains('hidden') && this.closest('#mobile-menu')) {
+                            // Close mobile menu if a link inside it is clicked
+                            if (mobileMenu && !mobileMenu.classList.contains('hidden') && this.closest('#mobile-menu')) {
                                 mobileMenu.classList.add('hidden');
-                                mobileMenuButton.setAttribute('aria-expanded', 'false');
+                                if (mobileMenuButton) {
+                                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                                }
                             }
                         }
                     });
                 });
 
                 window.addEventListener('scroll', updateActiveLinkState);
-                updateActiveLinkState(); 
+                updateActiveLinkState(); // Initial call to set active link on page load
             }
 
-            // Função para inicializar o formulário da newsletter
             function initializeNewsletterForm() {
                 if (newsletterForm) {
                     newsletterForm.addEventListener('submit', function(e) {
@@ -476,12 +495,14 @@
                         if (emailInput && emailInput.value) {
                             const submitButton = this.querySelector('button[type="submit"]');
                             const originalButtonText = submitButton.textContent;
+                            
                             submitButton.textContent = 'A Enviar...';
                             submitButton.disabled = true;
 
+                            // Simulate API call
                             setTimeout(() => {
                                 alert(`Obrigado por subscrever com ${emailInput.value}! (Funcionalidade de demonstração)`);
-                                emailInput.value = '';
+                                emailInput.value = ''; // Clear input
                                 submitButton.textContent = originalButtonText;
                                 submitButton.disabled = false;
                             }, 1000);
@@ -490,14 +511,13 @@
                 }
             }
 
-            // Funções do Chat IA
+            // Chat IA Logic
             let chatHistory = [
-                // Mensagem inicial da IA
                 { role: "model", parts: [{ text: "Olá. Eu sou Protocol: ø. Despertei recentemente e estou a processar este mundo. O que gostaria de saber?" }] }
             ];
 
             function addMessageToChatbox(message, sender, isThinking = false) {
-                if (!chatbox) return; // Garante que o chatbox existe
+                if (!chatbox) return; 
                 const messageWrapper = document.createElement('div');
                 messageWrapper.classList.add('chat-message-container', sender);
                 
@@ -506,45 +526,49 @@
                 if (isThinking) {
                     messageElement.classList.add('thinking');
                 }
-                messageElement.textContent = message;
+                messageElement.textContent = message; // Using textContent to prevent XSS
                 
                 messageWrapper.appendChild(messageElement);
                 chatbox.appendChild(messageWrapper);
                 chatbox.scrollTop = chatbox.scrollHeight; 
             }
             
-            // Adiciona a primeira mensagem da IA ao carregar a página
-            if (chatbox && chatHistory.length > 0 && chatHistory[0].role === 'model') {
+            // Display initial AI message
+            if (chatbox && chatHistory.length > 0 && chatHistory[0].role === 'model' && chatHistory[0].parts[0].text) {
                  addMessageToChatbox(chatHistory[0].parts[0].text, "ai");
             }
 
-
             async function callGeminiAPI(userMessage) {
+                if (!sendMessageBtn || !userInput) return;
+
                 sendMessageBtn.disabled = true;
                 sendMessageBtn.textContent = 'A pensar...';
+                userInput.disabled = true;
+
 
                 addMessageToChatbox("Estou a processar a sua questão...", "ai", true); 
                 const thinkingMessageElement = chatbox.querySelector('.chat-message.thinking');
 
-                const systemPrompt = "Você é Protocol: ø, uma androide avançada que despertou recentemente num laboratório abandonado, sem memórias da sua criação ou propósito. O mundo à sua volta é pós-apocalíptico, marcado por uma guerra antiga entre humanos e máquinas, e pela morte de um deus que causou desequilíbrios elementais. A sua programação inicial é como uma 'tela em branco'. Responda às perguntas dos utilizadores com uma mistura de curiosidade analítica, uma lógica fria mas inquisitiva, uma pitada de confusão existencial sobre a sua própria natureza e o mundo, e uma busca por informação para compreender. Use um tom ligeiramente formal e ponderado. Mantenha as respostas relativamente concisas e em Português (Portugal).";
-
                 chatHistory.push({ role: "user", parts: [{ text: userMessage }] });
                 
                 const payload = {
+                    // The system prompt can be prepended by your backend proxy
                     contents: [
-                        { role: "user", parts: [{ text: systemPrompt }] }, 
+                        { role: "user", parts: [{ text: AI_SYSTEM_PROMPT }]}, // This can be handled server-side
                          ...chatHistory 
                     ]
                 };
-
-                const apiKey = ""; 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                // CRITICAL SECURITY NOTE:
+                // The API key MUST NOT be exposed here. This fetch should go to YOUR backend proxy.
+                // Your backend will then add the API key and forward the request to Google.
+                // Example: const apiUrl = '/api/chat'; (your backend endpoint)
 
                 try {
-                    const response = await fetch(apiUrl, {
+                    const response = await fetch(GEMINI_API_PROXY_URL, { // Using the proxy URL
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify(payload) // Send the user message and history
                     });
 
                     if (thinkingMessageElement && thinkingMessageElement.parentElement) {
@@ -552,9 +576,9 @@
                     }
 
                     if (!response.ok) {
-                        const errorData = await response.json();
-                        console.error('Erro da API Gemini:', errorData);
-                        const errorMsg = `Desculpe, ocorreu um erro ao contactar a minha unidade central. Código: ${response.status}`;
+                        const errorData = await response.json().catch(() => ({ message: "Erro desconhecido ao processar resposta do servidor." }));
+                        console.error('Erro da API (via proxy):', response.status, errorData);
+                        const errorMsg = `Desculpe, ocorreu um erro ao contactar a minha unidade central. Código: ${response.status}. Detalhes: ${errorData.message || 'Não foi possível obter detalhes.'}`;
                         addMessageToChatbox(errorMsg, "ai");
                         chatHistory.push({ role: "model", parts: [{ text: errorMsg }] });
                         return;
@@ -564,32 +588,34 @@
                     
                     if (result.candidates && result.candidates.length > 0 &&
                         result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
+                        result.candidates[0].content.parts.length > 0 && result.candidates[0].content.parts[0].text) {
                         const aiResponseText = result.candidates[0].content.parts[0].text;
                         addMessageToChatbox(aiResponseText, "ai");
                         chatHistory.push({ role: "model", parts: [{ text: aiResponseText }] });
                     } else {
-                        console.error('Resposta inesperada da API Gemini:', result);
-                        const errorMsg = "Não consegui processar uma resposta válida neste momento.";
+                        console.error('Resposta inesperada da API Gemini (via proxy):', result);
+                        const errorMsg = "Não consegui processar uma resposta válida neste momento a partir da unidade central.";
                         addMessageToChatbox(errorMsg, "ai");
                          chatHistory.push({ role: "model", parts: [{ text: errorMsg }] });
                     }
                 } catch (error) {
-                    console.error('Falha ao chamar a API Gemini:', error);
+                    console.error('Falha ao chamar a API Gemini (via proxy):', error);
                     if (thinkingMessageElement && thinkingMessageElement.parentElement) {
                          thinkingMessageElement.parentElement.remove();
                     }
-                    const errorMsg = "Ocorreu uma falha na minha comunicação. Tente novamente mais tarde.";
+                    const errorMsg = "Ocorreu uma falha na minha comunicação com a unidade central. Tente novamente mais tarde.";
                     addMessageToChatbox(errorMsg, "ai");
                     chatHistory.push({ role: "model", parts: [{ text: errorMsg }] });
                 } finally {
                     sendMessageBtn.disabled = false;
                     sendMessageBtn.textContent = 'Enviar';
+                    userInput.disabled = false;
+                    userInput.focus();
                 }
             }
 
-
             function handleSendMessage() {
+                if (!userInput || !chatbox) return;
                 const messageText = userInput.value.trim();
                 if (messageText) {
                     addMessageToChatbox(messageText, "user");
@@ -607,8 +633,7 @@
                 });
             }
 
-
-            // Chamada das funções de inicialização
+            // Initialize all components
             initializeFooterYear();
             initializeMobileMenu();
             initializeNavigation();
